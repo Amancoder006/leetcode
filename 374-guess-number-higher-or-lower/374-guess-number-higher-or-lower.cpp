@@ -10,12 +10,12 @@
 class Solution {
 public:
     int guessNumber(int n) {
-        int s=1,e=n;
+        int s=0,e=n-1;
         while(s<=e){
             int mid = s+(e-s)/2;
-            int res=guess(mid);
+            int res=guess(mid+1);
             if(res==0){
-                return mid;
+                return mid+1;
             
             }
             else if(res==1)s=mid+1;
