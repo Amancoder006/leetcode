@@ -11,12 +11,16 @@
  */
 class Solution {
 public:
+    int check(TreeNode* root){
+        if(root->left == nullptr && root->right==nullptr)return root->val;
+        int left = check(root->left);
+        int right = check(root->right);
+        // if(left==nullptr && right==nullptr)return root->val;
+        if(root->val==left+right)return root->val;
+        return INT_MIN;
+    }
     bool checkTree(TreeNode* root) {
-        int a=root->left->val;
-        int b=root->right->val;
-        int c=root->val;
-        if(a+b==c)return true;
-        else return false;
+        return check(root)==INT_MIN? 0 : 1;
         
     }
 };
