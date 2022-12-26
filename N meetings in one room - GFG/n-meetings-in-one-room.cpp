@@ -5,6 +5,8 @@ using namespace std;
 // } Driver Code Ends
 
 #define pb push_back
+#define ss second
+#define ff first
 class Solution
 {
     public:
@@ -18,11 +20,11 @@ class Solution
         }
         sort(v.begin(),v.end());
         int ans=1;
-        int k=v[0].first;
+        int t=v[0].ff;
         for(int i=1;i<n;i++){
-            if(k<v[i].second){
+            if(t<v[i].ss){
                 ans++;
-                k=v[i].first;
+                t=v[i].ff;
             }
         }
         return ans;
