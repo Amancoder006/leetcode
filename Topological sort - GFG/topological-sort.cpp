@@ -7,36 +7,33 @@ class Solution
 {
 	public:
 	//Function to return list containing vertices in Topological order. 
+	void solve(int n,vector<int> &ans,vector<int> adj[],map<int,int> &vis){
+	    vis[n]=1;
+	    
+	    for(auto i:adj[n]){
+	        if(vis[i]==0){
+	            solve(i,ans,adj,vis);
+	        }
+	    }
+	    ans.push_back(n);
+	    
+	}
+	
 	vector<int> topoSort(int V, vector<int> adj[]) 
 	{
 	    // code here
 	    vector<int> ans;
-	    int indeg[V]={0};
+	    map<int,int> m;
+	   
 	    for(int i=0;i<V;i++){
-	        for(auto j:adj[i])indeg[j]++;
+	        if(m[i]==0){
+	            solve(i,ans,adj,m);
+	        }
 	    }
-	    
 	   // cout<<adj[0].length<<endl;
 	   
-	   queue<int> q;
-	   for(int i=0;i<V;i++){
-	       if(indeg[i]==0)q.push(i);
-	   }
-	   
-	   while(!q.empty()){
-	       int node= q.front();
-	       ans.push_back(node);
-	       q.pop();
-	       
-	       for(auto i:adj[node]){
-	           indeg[i]--;
-	           if(indeg[i]==0){
-	               q.push(i);
-	           }
-	       }
-	   }
-	   // for(auto i:indeg)cout<<i.first<<" "<<i.second<<endl;
-	    
+	   // for(auto i:ans)cout<<i<<" ";cout<<endl;
+	    reverse(ans.begin(),ans.end());
 	    return ans;
 	}
 };
