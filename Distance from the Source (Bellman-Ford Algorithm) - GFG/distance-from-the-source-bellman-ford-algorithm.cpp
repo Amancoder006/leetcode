@@ -13,30 +13,28 @@ class Solution {
     *   V: number of vertices
     */
     vector<int> bellman_ford(int V, vector<vector<int>>& edges, int S) {
-        // Code here
         vector<int> dis(V);
+        
+        int vis[V] = {0};
+        
         for(int i=0;i<V;i++){
             dis[i]=1e8;
         }
-        
-        dis[S]=0;
+        dis[S] = 0;
         for(int i=0;i<V-1;i++){
-            for(auto edg: edges){
-                if(dis[edg[0]]+edg[2]<dis[edg[1]]){
-                    dis[edg[1]] = dis[edg[0]]+edg[2];
+            for(auto e:edges){
+                if( dis[e[0]] + e[2] < dis[e[1]] ){
+                    dis[e[1]] = dis[e[0]] + e[2]; 
                 }
             }
         }
-        
-         for(auto edg: edges){
-                if(dis[edg[0]]+edg[2]<dis[edg[1]]){
+        for(auto e:edges){
+                if( dis[e[0]] + e[2] < dis[e[1]] ){
                     return {-1};
                 }
             }
-        
+        // Code here
         return dis;
-        
-        
     }
 };
 
